@@ -1,4 +1,7 @@
-<% if @book.errors.any? %>
+<main>
+<div class="container">
+
+  <% if @book.errors.any? %>
   <%= @book.errors.count %>errors prohibited this book from being saved:
   <ul>
     <% @book.errors.full_messages.each do |message| %>
@@ -6,29 +9,34 @@
     <% end %>
   </ul>
 <% end %>
-<main>
-<div class="container">
+
+
   <div class="row">
     <div class="col-md-3">
-<%= render 'users/list', users: @users %>
+<%= render 'users/list', user: @user, book: @book %>
     </div>
     <div class="col-md-8 offset-md-1">
       <h2>Books</h2>
       <table class="table table-hover table-inverse">
   <thead>
     <tr>
-      <th></th>
       <th>Title</th>
       <th>Opinion</th>
+      <th></th>
       <th colspan="3"></th>
     </tr>
   </thead>
   <tbody>
+    <% @books.each do |book| %>
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>
+          <%= link_to user_path(book.user.id), method: :get do %>
+          <%= image_tag book.user.get_profile_image(100,100) %>
+          <% end %>
+          <%= link_to book.title , book_path(book.id) %></td>
+        <td><%= book.body %></td>
       </tr>
+    <% end %>
   </tbody>
 </table>
     </div>

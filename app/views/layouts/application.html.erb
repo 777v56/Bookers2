@@ -11,7 +11,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://kit.fontawesome.com/cccf4986d1.js" crossorigin="anonymous"></script>
   </head>
-  
+
   <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
@@ -23,8 +23,8 @@
         <ul class="navbar-nav ml-auto">
           <% if user_signed_in? %>
           <li>
-            <a class="nav-link text-light" href="/users">
-            <i class="fas fa-home"></i>Home</a>
+            <%= link_to user_path(current_user.id), class: 'nav-link text-light', method: :get do %>
+          <i class="fas fa-home"></i>Home<% end %>
           </li>
           <li>
             <a class="nav-link text-light" href="/users">
@@ -60,12 +60,14 @@
     </div>
   </nav>
 </header>
-  
-  
+
+
   <body>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
-  
+
   <footer>
   <div class="container mt-5">
   	<div class="row">
